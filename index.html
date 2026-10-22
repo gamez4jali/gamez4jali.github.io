@@ -15,12 +15,28 @@
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin: 16px 0; }
   .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; padding: 10px 18px; border-radius: 10px; margin: 8px 8px 0 0; }
   a { color: var(--accent); }
+  .game { display: flex; gap: 16px; align-items: flex-start; }
+  .game img { width: 88px; height: 88px; border-radius: 18px; flex: none; }
+  @media (max-width: 480px) { .game { flex-direction: column; } }
 </style>
 </head>
 <body>
 <main>
   <h1>Gamez4jali</h1>
   <p class="meta">Small, friendly mobile games. Contact: <a href="mailto:gamez4jali@gmail.com">gamez4jali@gmail.com</a></p>
+
+  <div class="card game">
+    <img src="harvest-twist/icon.png" alt="Harvest Twist icon">
+    <div>
+      <h2>Harvest Twist: Match Puzzle</h2>
+      <p>A cozy farm puzzle: flick a crop and its whole field turns, line up matches and combos, and help Mia and
+      Grandpa Joe rebuild Sunny Hollow Farm after the storm. 80 levels, play offline.
+      Contains ads and optional in-app purchases.</p>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.gamez4jali.harvesttwist">Get it on Google Play</a>
+      <a class="btn" href="harvest-twist/">Game page</a>
+      <a class="btn" href="harvest-twist/privacy.html">Privacy Policy</a>
+    </div>
+  </div>
 
   <div class="card">
     <h2>Smash It: Whack-a-Mole</h2>
