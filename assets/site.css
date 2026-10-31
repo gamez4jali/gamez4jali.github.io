@@ -137,7 +137,7 @@ h1, h2, h3, h4 { font-family: var(--head); line-height: 1.08; letter-spacing: -.
 .stat span { color: var(--muted); font-size: 15px; }
 
 /* game showcase */
-.tabs { display: flex; justify-content: center; gap: 10px; margin: 0 auto 40px; padding: 6px; width: max-content; max-width: 100%; overflow-x: auto; scrollbar-width: none; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); }
+.tabs { position: relative; display: flex; justify-content: center; gap: 10px; margin: 0 auto 40px; padding: 6px; width: max-content; max-width: 100%; overflow-x: auto; scrollbar-width: none; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); }
 .tabs::-webkit-scrollbar { display: none; }
 .tab { flex: none; display: flex; align-items: center; gap: 10px; padding: 8px 18px 8px 8px; border-radius: 16px; border: 1px solid transparent; background: transparent; color: var(--muted); font: 600 15px/1 "Outfit", system-ui, sans-serif; cursor: pointer; transition: background .35s, color .35s, border-color .35s; }
 .tab img { width: 38px; height: 38px; border-radius: 11px; transition: transform .35s var(--ease); }

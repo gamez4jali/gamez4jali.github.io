@@ -105,7 +105,8 @@
       t.setAttribute('aria-selected', on);
       t.tabIndex = on ? 0 : -1;
       if (on && focus) t.focus();
-      if (on) t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+      // slide the tab row sideways only; scrollIntoView would also scroll the page
+      if (on) { const bar = t.parentElement; bar.scrollLeft = t.offsetLeft - (bar.clientWidth - t.offsetWidth) / 2; }
     });
     panels.forEach(p => {
       const on = p === panel;
