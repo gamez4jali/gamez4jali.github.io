@@ -3,21 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gamez4jali – Small, friendly mobile games</title>
-<meta name="description" content="Gamez4jali is an indie mobile game studio making small, friendly games for Android: Tap Cricket Go!, Harvest Twist, Letter Hunt, Find It! and Smash It.">
+<meta name="referrer" content="no-referrer">
+<title>Gamez4jali – Small games. Big smiles.</title>
+<meta name="description" content="Gamez4jali is an indie mobile game studio making small, friendly games for Android: Tap Cricket Go!, Harvest Twist, Smash It, Letter Hunt and Find It!">
 <link rel="canonical" href="https://gamez4jali.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gamez4jali">
-<meta property="og:title" content="Gamez4jali – Small, friendly mobile games">
+<meta property="og:title" content="Gamez4jali – Small games. Big smiles.">
 <meta property="og:description" content="Indie mobile games for Android: cricket, cozy farm puzzles, word hunts and arcade fun. Free on Google Play.">
 <meta property="og:url" content="https://gamez4jali.github.io/">
 <meta property="og:image" content="https://gamez4jali.github.io/tap-cricket-go/icon.png">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#0b1c45">
+<meta name="theme-color" content="#070f2b">
 <link rel="icon" href="tap-cricket-go/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -32,437 +34,373 @@
   ]
 }
 </script>
-<style>
-  :root {
-    --bg: #0b1c45; --bg-2: #10265c; --card: #142d6b; --line: #24478e;
-    --text: #eef3ff; --muted: #a9bbdf; --accent: #ffc62e; --accent-ink: #0b1c45;
-    --pink: #ff6fa8; --green: #4fd68b; --sky: #5cc8ff;
-    --radius: 20px;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; overflow-x: hidden; }
-  a { color: var(--accent); }
-  h1, h2, h3, .brand { font-family: "Fredoka", system-ui, sans-serif; line-height: 1.15; }
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
-
-  /* nav */
-  header { position: sticky; top: 0; z-index: 10; background: rgba(11, 28, 69, .85); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.06); }
-  nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .brand { font-size: 24px; font-weight: 700; color: var(--text); text-decoration: none; }
-  .brand span { color: var(--accent); }
-  nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; }
-  nav ul a { color: var(--muted); text-decoration: none; font-weight: 600; }
-  nav ul a:hover { color: var(--text); }
-
-  /* hero */
-  .hero { position: relative; padding: 72px 0 80px; text-align: center; }
-  .hero::before { content: ""; position: absolute; inset: 0; background:
-      radial-gradient(600px 300px at 20% 10%, rgba(92,200,255,.18), transparent 70%),
-      radial-gradient(500px 300px at 85% 30%, rgba(255,111,168,.16), transparent 70%),
-      radial-gradient(700px 300px at 50% 100%, rgba(255,198,46,.12), transparent 70%);
-    pointer-events: none; }
-  .hero > * { position: relative; }
-  .pill { display: inline-block; background: rgba(255,198,46,.14); color: var(--accent); border: 1px solid rgba(255,198,46,.35); padding: 4px 14px; border-radius: 999px; font-size: 14px; font-weight: 600; }
-  .hero h1 { font-size: clamp(38px, 7vw, 68px); margin: 18px 0 14px; }
-  .hero h1 em { font-style: normal; color: var(--accent); }
-  .hero p { color: var(--muted); font-size: 19px; max-width: 620px; margin: 0 auto 30px; }
-  .icons { display: flex; justify-content: center; gap: 18px; margin: 44px 0 0; flex-wrap: wrap; }
-  .icons a { display: block; transition: transform .25s; animation: bob 4s ease-in-out infinite; }
-  .icons a:nth-child(2) { animation-delay: -.8s; } .icons a:nth-child(3) { animation-delay: -1.6s; }
-  .icons a:nth-child(4) { animation-delay: -2.4s; } .icons a:nth-child(5) { animation-delay: -3.2s; }
-  .icons a:hover { transform: scale(1.12) rotate(-4deg); animation-play-state: paused; }
-  .icons img { width: 92px; height: 92px; border-radius: 22px; box-shadow: 0 10px 30px rgba(0,0,0,.35); display: block; }
-  @keyframes bob { 50% { translate: 0 -10px; } }
-  @media (prefers-reduced-motion: reduce) { .icons a { animation: none; } html { scroll-behavior: auto; } }
-
-  .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; padding: 12px 22px; border-radius: 14px; transition: transform .15s, background .15s; }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-primary { background: var(--accent); color: var(--accent-ink); }
-  .btn-ghost { background: rgba(255,255,255,.06); color: var(--text); border: 1px solid var(--line); }
-  .btn-ghost:hover { background: rgba(255,255,255,.12); }
-  .btn-sm { padding: 9px 16px; font-size: 15px; border-radius: 12px; }
-
-  /* stats */
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 0 0 80px; }
-  .stat { background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; text-align: center; }
-  .stat b { display: block; font-family: "Fredoka", sans-serif; font-size: 30px; color: var(--accent); }
-  .stat span { color: var(--muted); font-size: 15px; }
-
-  /* sections */
-  section { padding: 0 0 90px; }
-  .section-head { text-align: center; margin-bottom: 36px; }
-  .section-head h2 { font-size: clamp(30px, 5vw, 42px); margin: 0 0 8px; }
-  .section-head p { color: var(--muted); margin: 0; }
-
-  /* filters */
-  .filters { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
-  .filters button { font: inherit; font-weight: 600; font-size: 15px; color: var(--muted); background: transparent; border: 1px solid var(--line); padding: 7px 16px; border-radius: 999px; cursor: pointer; }
-  .filters button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-
-  /* game cards */
-  .games { display: grid; gap: 22px; }
-  .game { background: linear-gradient(180deg, var(--card), var(--bg-2)); border: 1px solid var(--line); border-radius: 26px; padding: 26px; display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start; }
-  .game[hidden] { display: none; }
-  .game-top { display: flex; gap: 16px; align-items: center; margin-bottom: 14px; }
-  .game-top img { width: 84px; height: 84px; border-radius: 20px; flex: none; box-shadow: 0 6px 18px rgba(0,0,0,.3); }
-  .game h3 { font-size: 26px; margin: 0 0 6px; }
-  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
-  .tag { font-size: 13px; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: rgba(255,255,255,.08); color: var(--muted); }
-  .tag.sport { background: rgba(92,200,255,.16); color: var(--sky); }
-  .tag.puzzle { background: rgba(79,214,139,.16); color: var(--green); }
-  .tag.word { background: rgba(255,111,168,.16); color: var(--pink); }
-  .tag.arcade { background: rgba(255,198,46,.16); color: var(--accent); }
-  .game p { color: var(--muted); margin: 0 0 16px; }
-  .actions { display: flex; flex-wrap: wrap; gap: 8px; }
-  .shots { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
-  .shots button { flex: none; padding: 0; border: 0; background: none; cursor: zoom-in; scroll-snap-align: start; border-radius: 14px; overflow: hidden; }
-  .shots img { height: 230px; width: auto; display: block; border-radius: 14px; background: var(--bg); transition: transform .2s; }
-  .shots button:hover img { transform: scale(1.03); }
-
-  /* about */
-  .about { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: center; }
-  .about h2 { font-size: clamp(30px, 5vw, 42px); margin: 0 0 14px; }
-  .about p { color: var(--muted); }
-  .values { display: grid; gap: 14px; }
-  .value { background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
-  .value h3 { margin: 0 0 4px; font-size: 20px; }
-  .value p { margin: 0; font-size: 15px; }
-
-  /* contact */
-  .contact { background: linear-gradient(135deg, #1a3a85, #2a1f6b); border: 1px solid var(--line); border-radius: 30px; padding: 48px 28px; text-align: center; }
-  .contact h2 { font-size: clamp(28px, 5vw, 40px); margin: 0 0 10px; }
-  .contact p { color: var(--muted); margin: 0 0 26px; }
-  .contact .actions { justify-content: center; }
-
-  footer { border-top: 1px solid rgba(255,255,255,.06); padding: 36px 0 48px; color: var(--muted); font-size: 15px; }
-  .foot { display: grid; grid-template-columns: 1.3fr repeat(4, 1fr); gap: 24px; }
-  footer h4 { color: var(--text); margin: 0 0 8px; font-size: 15px; }
-  footer ul { list-style: none; margin: 0; padding: 0; }
-  footer li { margin: 4px 0; }
-  footer a { color: var(--muted); text-decoration: none; }
-  footer a:hover { color: var(--accent); }
-
-  /* lightbox */
-  dialog { border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 92vh; }
-  dialog::backdrop { background: rgba(5,12,32,.88); }
-  dialog img { max-width: 94vw; max-height: 88vh; border-radius: 16px; display: block; }
-  dialog form { position: absolute; top: 8px; right: 8px; }
-  dialog button { font: 700 22px/1 system-ui; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(0,0,0,.6); color: #fff; cursor: pointer; }
-
-  @media (max-width: 860px) {
-    .game { grid-template-columns: 1fr; padding: 20px; }
-    .about { grid-template-columns: 1fr; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .foot { grid-template-columns: 1fr 1fr; }
-    .shots img { height: 190px; }
-  }
-  @media (max-width: 520px) {
-    nav ul { gap: 14px; font-size: 15px; }
-    nav ul li:nth-child(2) { display: none; }
-    .hero { padding: 48px 0 56px; }
-    .icons { gap: 12px; }
-    .icons img { width: 60px; height: 60px; border-radius: 15px; }
-    .foot { grid-template-columns: 1fr; }
-  }
-</style>
 </head>
 <body>
+<div class="bg" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 
-<header>
-  <nav class="wrap">
-    <a class="brand" href="#">Gamez<span>4</span>jali</a>
-    <ul>
-      <li><a href="#games">Games</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
-<main>
-  <div class="hero wrap">
-    <span class="pill">Indie studio · Made with Unity</span>
-    <h1>Small games.<br><em>Big smiles.</em></h1>
-    <p>We make friendly, easy-to-pick-up mobile games: cricket, cozy farm puzzles, word hunts and arcade fun. Free to play on Android.</p>
-    <div class="actions" style="justify-content:center">
-      <a class="btn btn-primary" href="#games">Explore our games</a>
-      <a class="btn btn-ghost" href="https://play.google.com/store/apps/dev?id=5060097297722451995" target="_blank" rel="noopener">See us on Google Play</a>
-    </div>
-    <div class="icons" aria-label="Our games">
-      <a href="#tap-cricket-go"><img src="https://play-lh.googleusercontent.com/hNhDBypORNBCEaIttq0qXiHh_YZki4kT8EgnrxX31oIRGj8LEUD7AJ9P2Kmc7_9BrfFOSowDjGUobtA8fgqf=s256-rw" alt="Tap Cricket Go!"></a>
-      <a href="#harvest-twist"><img src="https://play-lh.googleusercontent.com/bAyVkMcfB4nr6MLnNkIkhABiECbNXJSqj1rk6_zhvWUe1FkNyLU0C5Iv29DlAWD98sWA5elORij3Q0rl8dHy9w=s256-rw" alt="Harvest Twist"></a>
-      <a href="#smash-it"><img src="https://play-lh.googleusercontent.com/3ZlhO_SP8QrJXRRSbFNNxYCpuknfv-7tA_53m5-384wvwmyws2g-89v8fFmnG5r4kwnDELzazdswDCW11B4h=s256-rw" alt="Smash It: Whack-a-Mole"></a>
-      <a href="#letter-hunt"><img src="https://play-lh.googleusercontent.com/TwjxclEhnwYxaUWrvc6LzZAFwckl0VXHRcl1NtoS3tvY47p2mueQyUogmi6KOxfHsBBihO5kPR9yVcwcWf350w=s256-rw" alt="Letter Hunt"></a>
-      <a href="#find-it"><img src="https://play-lh.googleusercontent.com/9zN3FAcjhnh3no0eKXmUgh-upBTCs03YeP_wMO7JV0LSqf991qUed9jkXiWwUWuq-ePz0gaVvWM7aekDrzgwVks=s256-rw" alt="Find It! - Letter Hunt"></a>
+<header class="nav">
+  <div class="wrap">
+    <div class="nav-in">
+      <a class="brand" href="#top"><span class="brand-mark">G</span><span>Gamez<b>4</b>jali</span></a>
+      <ul class="nav-links">
+        <li><a href="#games">Games</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="nav-cta"><a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/dev?id=5060097297722451995" target="_blank" rel="noopener">Google Play</a></li>
+      </ul>
     </div>
   </div>
+</header>
+
+<main id="top">
+  <!-- hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow reveal"><i></i>Indie game studio · Made with Unity</span>
+        <h1 class="reveal" style="--d:.08s"><span>Small games.</span><span class="grad">Big smiles.</span></h1>
+        <p class="reveal" style="--d:.16s">We make friendly, easy-to-pick-up mobile games: one-tap cricket, cozy farm puzzles, word hunts and arcade fun. Free to download on Android.</p>
+        <div class="hero-cta reveal" style="--d:.24s">
+          <a class="btn btn-primary" href="#games">Explore our games
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+          <a class="btn btn-ghost" href="https://play.google.com/store/apps/dev?id=5060097297722451995" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 5 3.5z"/></svg>See us on Google Play</a>
+        </div>
+        <div class="proof reveal" style="--d:.32s">
+          <div class="stack">
+            <img src="https://play-lh.googleusercontent.com/hNhDBypORNBCEaIttq0qXiHh_YZki4kT8EgnrxX31oIRGj8LEUD7AJ9P2Kmc7_9BrfFOSowDjGUobtA8fgqf=s256-rw" alt="">
+            <img src="https://play-lh.googleusercontent.com/bAyVkMcfB4nr6MLnNkIkhABiECbNXJSqj1rk6_zhvWUe1FkNyLU0C5Iv29DlAWD98sWA5elORij3Q0rl8dHy9w=s256-rw" alt="">
+            <img src="https://play-lh.googleusercontent.com/3ZlhO_SP8QrJXRRSbFNNxYCpuknfv-7tA_53m5-384wvwmyws2g-89v8fFmnG5r4kwnDELzazdswDCW11B4h=s256-rw" alt="">
+            <img src="https://play-lh.googleusercontent.com/TwjxclEhnwYxaUWrvc6LzZAFwckl0VXHRcl1NtoS3tvY47p2mueQyUogmi6KOxfHsBBihO5kPR9yVcwcWf350w=s256-rw" alt="">
+            <img src="https://play-lh.googleusercontent.com/9zN3FAcjhnh3no0eKXmUgh-upBTCs03YeP_wMO7JV0LSqf991qUed9jkXiWwUWuq-ePz0gaVvWM7aekDrzgwVks=s256-rw" alt="">
+          </div>
+          <div><b>5 games</b> live on Google Play</div>
+        </div>
+      </div>
+
+      <div class="hero-stage reveal" style="--d:.2s">
+        <div class="ring"></div><div class="ring r2"></div>
+        <a class="orbit o1" href="#tap-cricket-go" aria-label="Tap Cricket Go!"><img src="https://play-lh.googleusercontent.com/hNhDBypORNBCEaIttq0qXiHh_YZki4kT8EgnrxX31oIRGj8LEUD7AJ9P2Kmc7_9BrfFOSowDjGUobtA8fgqf=s256-rw" alt=""></a>
+        <a class="orbit o2" href="#harvest-twist" aria-label="Harvest Twist"><img src="https://play-lh.googleusercontent.com/bAyVkMcfB4nr6MLnNkIkhABiECbNXJSqj1rk6_zhvWUe1FkNyLU0C5Iv29DlAWD98sWA5elORij3Q0rl8dHy9w=s256-rw" alt=""></a>
+        <a class="orbit o3" href="#smash-it" aria-label="Smash It: Whack-a-Mole"><img src="https://play-lh.googleusercontent.com/3ZlhO_SP8QrJXRRSbFNNxYCpuknfv-7tA_53m5-384wvwmyws2g-89v8fFmnG5r4kwnDELzazdswDCW11B4h=s256-rw" alt=""></a>
+        <a class="orbit o4" href="#letter-hunt" aria-label="Letter Hunt"><img src="https://play-lh.googleusercontent.com/TwjxclEhnwYxaUWrvc6LzZAFwckl0VXHRcl1NtoS3tvY47p2mueQyUogmi6KOxfHsBBihO5kPR9yVcwcWf350w=s256-rw" alt=""></a>
+        <a class="orbit o5" href="#find-it" aria-label="Find It!"><img src="https://play-lh.googleusercontent.com/9zN3FAcjhnh3no0eKXmUgh-upBTCs03YeP_wMO7JV0LSqf991qUed9jkXiWwUWuq-ePz0gaVvWM7aekDrzgwVks=s256-rw" alt=""></a>
+        <div class="phone">
+          <div class="screen">
+            <img class="on" src="https://play-lh.googleusercontent.com/GORoBu1CoLSu2e7gXIWVqTVcpeN505B6Mt2vBieYsPULSpKl_elc3VxVzE6R1eaU0t-pKpu7lwPUcXFzdHFvkg=h900-rw" alt="Tap Cricket Go! gameplay">
+          </div>
+        </div>
+        <a class="now-playing" href="#tap-cricket-go"><img src="https://play-lh.googleusercontent.com/hNhDBypORNBCEaIttq0qXiHh_YZki4kT8EgnrxX31oIRGj8LEUD7AJ9P2Kmc7_9BrfFOSowDjGUobtA8fgqf=s256-rw" alt=""><span>Now showing</span><strong>Tap Cricket Go!</strong></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- screenshot strip (filled by script) -->
+  <div class="marquee" aria-hidden="true"><div class="marquee-track"></div></div>
 
   <div class="wrap">
     <div class="stats">
-      <div class="stat"><b>5</b><span>Games on Google Play</span></div>
-      <div class="stat"><b>4</b><span>Genres</span></div>
-      <div class="stat"><b>Free</b><span>To download & play</span></div>
-      <div class="stat"><b>Unity</b><span>Built with love</span></div>
+      <div class="stat reveal"><b data-count="5">5</b><span>Games on Google Play</span></div>
+      <div class="stat reveal" style="--d:.08s"><b data-count="285" data-suffix="+">285+</b><span>Handcrafted levels</span></div>
+      <div class="stat reveal" style="--d:.16s"><b data-count="4">4</b><span>Genres to play</span></div>
+      <div class="stat reveal" style="--d:.24s"><b data-count="100" data-suffix="%">100%</b><span>Free to download</span></div>
     </div>
   </div>
 
-  <section id="games" class="wrap">
-    <div class="section-head">
-      <h2>Our games</h2>
-      <p>Tap a screenshot to see it bigger.</p>
-    </div>
+  <!-- games -->
+  <section class="section" id="games">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">Our games</span>
+        <h2>Pick one. Play for a minute. Stay for an hour.</h2>
+        <p>Sports, puzzles, words and arcade. Tap a game to take a look.</p>
+      </div>
 
-    <div class="filters" role="group" aria-label="Filter games">
-      <button type="button" data-filter="all" aria-pressed="true">All</button>
-      <button type="button" data-filter="sport" aria-pressed="false">Sports</button>
-      <button type="button" data-filter="puzzle" aria-pressed="false">Puzzle</button>
-      <button type="button" data-filter="word" aria-pressed="false">Word</button>
-      <button type="button" data-filter="arcade" aria-pressed="false">Arcade</button>
-    </div>
+      <div class="tabs reveal" role="tablist" aria-label="Our games">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="tap-cricket-go" style="--tc:#ffc62e"><img src="https://play-lh.googleusercontent.com/hNhDBypORNBCEaIttq0qXiHh_YZki4kT8EgnrxX31oIRGj8LEUD7AJ9P2Kmc7_9BrfFOSowDjGUobtA8fgqf=s256-rw" alt="">Tap Cricket Go!</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="harvest-twist" style="--tc:#4fd68b" tabindex="-1"><img src="https://play-lh.googleusercontent.com/bAyVkMcfB4nr6MLnNkIkhABiECbNXJSqj1rk6_zhvWUe1FkNyLU0C5Iv29DlAWD98sWA5elORij3Q0rl8dHy9w=s256-rw" alt="">Harvest Twist</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="smash-it" style="--tc:#ff7a45" tabindex="-1"><img src="https://play-lh.googleusercontent.com/3ZlhO_SP8QrJXRRSbFNNxYCpuknfv-7tA_53m5-384wvwmyws2g-89v8fFmnG5r4kwnDELzazdswDCW11B4h=s256-rw" alt="">Smash It</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="letter-hunt" style="--tc:#ff6fa8" tabindex="-1"><img src="https://play-lh.googleusercontent.com/TwjxclEhnwYxaUWrvc6LzZAFwckl0VXHRcl1NtoS3tvY47p2mueQyUogmi6KOxfHsBBihO5kPR9yVcwcWf350w=s256-rw" alt="">Letter Hunt</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="find-it" style="--tc:#3fd0d6" tabindex="-1"><img src="https://play-lh.googleusercontent.com/9zN3FAcjhnh3no0eKXmUgh-upBTCs03YeP_wMO7JV0LSqf991qUed9jkXiWwUWuq-ePz0gaVvWM7aekDrzgwVks=s256-rw" alt="">Find It!</button>
+      </div>
 
-    <div class="games">
+      <div class="showcase reveal">
 
-      <article class="game" id="tap-cricket-go" data-tags="sport">
-        <div>
-          <div class="game-top">
-            <img src="https://play-lh.googleusercontent.com/hNhDBypORNBCEaIttq0qXiHh_YZki4kT8EgnrxX31oIRGj8LEUD7AJ9P2Kmc7_9BrfFOSowDjGUobtA8fgqf=s256-rw" alt="Tap Cricket Go! icon">
-            <div>
-              <h3>Tap Cricket Go!</h3>
-              <div class="tags"><span class="tag sport">Sports</span><span class="tag">Casual</span></div>
+        <article class="panel" id="tap-cricket-go" role="tabpanel" style="--c:#ffc62e">
+          <div class="p-info">
+            <div class="p-head">
+              <img src="https://play-lh.googleusercontent.com/hNhDBypORNBCEaIttq0qXiHh_YZki4kT8EgnrxX31oIRGj8LEUD7AJ9P2Kmc7_9BrfFOSowDjGUobtA8fgqf=s256-rw" alt="Tap Cricket Go! icon">
+              <div><h3>Tap Cricket Go!</h3><div class="tags"><span class="tag c">Sports</span><span class="tag">Casual</span></div></div>
+            </div>
+            <p>A fast one-tap cricket card game: time your tap to smash sixes, collect players from Common to Legendary, set your batting order and win the big tournaments.</p>
+            <ul class="features">
+              <li>One perfectly timed tap per ball</li>
+              <li>Collect Common to Legendary players</li>
+              <li>Play Offs, weekly League, Chase &amp; Endless</li>
+              <li>Achievements &amp; leaderboards on Play Games</li>
+            </ul>
+            <div class="p-actions">
+              <a class="btn btn-c" href="https://play.google.com/store/apps/details?id=com.g4jali.tapcricketgo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 5 3.5z"/></svg>Get it on Google Play</a>
+              <a class="btn btn-ghost" href="tap-cricket-go/">Game page</a>
+              <a class="btn btn-ghost" href="tap-cricket-go/privacy.html">Privacy</a>
             </div>
           </div>
-          <p>A fast one-tap cricket card game: time your tap to smash sixes, collect players from Common to Legendary,
-          set your batting order and win Play Offs, the weekly League, Chase and Endless modes.
-          Contains ads and optional in-app purchases. Achievements and leaderboards with Google Play Games.</p>
-          <div class="actions">
-            <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=com.g4jali.tapcricketgo" target="_blank" rel="noopener">Get it on Google Play</a>
-            <a class="btn btn-ghost btn-sm" href="tap-cricket-go/">Game page</a>
-            <a class="btn btn-ghost btn-sm" href="tap-cricket-go/privacy.html">Privacy Policy</a>
-          </div>
-        </div>
-        <div class="shots">
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/GORoBu1CoLSu2e7gXIWVqTVcpeN505B6Mt2vBieYsPULSpKl_elc3VxVzE6R1eaU0t-pKpu7lwPUcXFzdHFvkg=h460-rw" alt="Tap Cricket Go! screenshot 1"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/KumTz4Vs-Zi8QrETe982EHV_CS8gU2jWV81-bnESOOjQSxaG314bQgta-2DLiZI0yY-hzHpVTOio_5XCM4YEsA=h460-rw" alt="Tap Cricket Go! screenshot 2"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/T9o4jWXqKqZH2eqimOg68DlikhcQL7E6xFaTGlH3tYzca_ROXBgMqAPQnTQIzZSXl_wetKhmkq0CLXJIxKVC=h460-rw" alt="Tap Cricket Go! screenshot 3"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/zutm_sKYIdfbQmyPbbSPqgrpsBOMvevk6mQRfAI3pcUUsnSreBThiGzy9lddvVypsAUz8sqJvhF6PhkonflYMQ=h460-rw" alt="Tap Cricket Go! screenshot 4"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/CcM63Zm4pbb37QPTHRd9gTnpMRUmhtNXUeAxDySkou4xU8148-DWgUz7aIiGfRsH2LkPQmdhuE8ZA9Bwamx-yA=h460-rw" alt="Tap Cricket Go! screenshot 5"></button>
-        </div>
-      </article>
-
-      <article class="game" id="harvest-twist" data-tags="puzzle">
-        <div>
-          <div class="game-top">
-            <img src="https://play-lh.googleusercontent.com/bAyVkMcfB4nr6MLnNkIkhABiECbNXJSqj1rk6_zhvWUe1FkNyLU0C5Iv29DlAWD98sWA5elORij3Q0rl8dHy9w=s256-rw" alt="Harvest Twist icon">
-            <div>
-              <h3>Harvest Twist: Match Puzzle</h3>
-              <div class="tags"><span class="tag puzzle">Puzzle</span><span class="tag">Offline</span></div>
+          <div class="p-media" data-slide-scope>
+            <div class="phone"><div class="screen" data-slides>
+              <img src="https://play-lh.googleusercontent.com/GORoBu1CoLSu2e7gXIWVqTVcpeN505B6Mt2vBieYsPULSpKl_elc3VxVzE6R1eaU0t-pKpu7lwPUcXFzdHFvkg=h900-rw" alt="Tap Cricket Go! screenshot 1">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/KumTz4Vs-Zi8QrETe982EHV_CS8gU2jWV81-bnESOOjQSxaG314bQgta-2DLiZI0yY-hzHpVTOio_5XCM4YEsA=h900-rw" alt="Tap Cricket Go! screenshot 2">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/T9o4jWXqKqZH2eqimOg68DlikhcQL7E6xFaTGlH3tYzca_ROXBgMqAPQnTQIzZSXl_wetKhmkq0CLXJIxKVC=h900-rw" alt="Tap Cricket Go! screenshot 3">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/zutm_sKYIdfbQmyPbbSPqgrpsBOMvevk6mQRfAI3pcUUsnSreBThiGzy9lddvVypsAUz8sqJvhF6PhkonflYMQ=h900-rw" alt="Tap Cricket Go! screenshot 4">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/CcM63Zm4pbb37QPTHRd9gTnpMRUmhtNXUeAxDySkou4xU8148-DWgUz7aIiGfRsH2LkPQmdhuE8ZA9Bwamx-yA=h900-rw" alt="Tap Cricket Go! screenshot 5">
+            </div></div>
+            <div class="p-nav">
+              <button class="arrow" type="button" data-dir="prev" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <div class="dots"></div>
+              <button class="arrow" type="button" data-dir="next" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
             </div>
           </div>
-          <p>A cozy farm puzzle: flick a crop and its whole field turns, line up matches and combos, and help Mia and
-          Grandpa Joe rebuild Sunny Hollow Farm after the storm. 80 levels, play offline.
-          Contains ads and optional in-app purchases.</p>
-          <div class="actions">
-            <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=com.gamez4jali.harvesttwist" target="_blank" rel="noopener">Get it on Google Play</a>
-            <a class="btn btn-ghost btn-sm" href="harvest-twist/">Game page</a>
-            <a class="btn btn-ghost btn-sm" href="harvest-twist/privacy.html">Privacy Policy</a>
-          </div>
-        </div>
-        <div class="shots">
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/oDuYh0F0ib0HvPmlmY1FAYSxrTay9pQrcqFq8YDNJ2taRuddZmv2HS4Pd_Vi0rLNdL1Zsephsv-_WjHxTIgX=h460-rw" alt="Harvest Twist screenshot 1"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/VlAE9o4zaIvx6XuLr7e9XS7Wv7L-8UK237BgpjceKErMJ-YA4SusH5w2cKfHPmJCO5uxWdtwuYeJWZG_u8aj=h460-rw" alt="Harvest Twist screenshot 2"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/-W6AfyJWqnyd6EtoR3upj6TMf2nkEaHLm-COXVTOK9B-zGUU1MmMPv9g8_bJQ-CXXbWnEhmXSeRqq9idElqYRnM=h460-rw" alt="Harvest Twist screenshot 3"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/olRU8TZRdE44Qdl8VhsA2aMKKHKUUvHJj3VkepRPT25E09KPCeKhG6QQjNyae8euhAWFUzJ1bqMfxDNE1PGV=h460-rw" alt="Harvest Twist screenshot 4"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/oVzp-vZQ-XBID0nEUIFkcC9AlzpgZliUfWYN3Dw_3UviMUQBOYeQQGVmcFLsRiuSnJfMJIB_59yl3qP9ohfQmA=h460-rw" alt="Harvest Twist screenshot 5"></button>
-        </div>
-      </article>
+        </article>
 
-      <article class="game" id="smash-it" data-tags="arcade">
-        <div>
-          <div class="game-top">
-            <img src="https://play-lh.googleusercontent.com/3ZlhO_SP8QrJXRRSbFNNxYCpuknfv-7tA_53m5-384wvwmyws2g-89v8fFmnG5r4kwnDELzazdswDCW11B4h=s256-rw" alt="Smash It icon">
-            <div>
-              <h3>Smash It: Whack-a-Mole</h3>
-              <div class="tags"><span class="tag arcade">Arcade</span><span class="tag">No ads</span><span class="tag">★ 5.0</span></div>
+        <article class="panel" id="harvest-twist" role="tabpanel" style="--c:#4fd68b" hidden>
+          <div class="p-info">
+            <div class="p-head">
+              <img src="https://play-lh.googleusercontent.com/bAyVkMcfB4nr6MLnNkIkhABiECbNXJSqj1rk6_zhvWUe1FkNyLU0C5Iv29DlAWD98sWA5elORij3Q0rl8dHy9w=s256-rw" alt="Harvest Twist icon">
+              <div><h3>Harvest Twist</h3><div class="tags"><span class="tag c">Puzzle</span><span class="tag">Offline</span></div></div>
+            </div>
+            <p>A cozy farm puzzle: flick a crop and its whole field turns, line up matches and combos, and help Mia and Grandpa Joe rebuild Sunny Hollow Farm after the storm.</p>
+            <ul class="features">
+              <li>Flick a crop, twist the whole field</li>
+              <li>80 handcrafted levels</li>
+              <li>Matches, combos and boosters</li>
+              <li>Play offline, anywhere</li>
+            </ul>
+            <div class="p-actions">
+              <a class="btn btn-c" href="https://play.google.com/store/apps/details?id=com.gamez4jali.harvesttwist" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 5 3.5z"/></svg>Get it on Google Play</a>
+              <a class="btn btn-ghost" href="harvest-twist/">Game page</a>
+              <a class="btn btn-ghost" href="harvest-twist/privacy.html">Privacy</a>
             </div>
           </div>
-          <p>A fast arcade game: whack the moles, dodge the bombs, beat the Boss Mole and race up the world ranks.
-          No ads. Sign in with Google Play Games or play as a guest.</p>
-          <div class="actions">
-            <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=com.DefaultCompany.WhackaMolemania" target="_blank" rel="noopener">Get it on Google Play</a>
-            <a class="btn btn-ghost btn-sm" href="privacy-policy.html">Privacy Policy</a>
-          </div>
-        </div>
-        <div class="shots">
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/s1uCZ_6UK8zC8qrfjR8iX_woH2GR3nfXYy9m8wzpQ_jsdfiqSX5NuU4B3d4XxqAhNizzhCcEpNKVQNos94pG=h460-rw" alt="Smash It screenshot 1"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/uu0cET_y88efA28jJS9XiWkZeeKq6c-AdyOBuJy9BqnX9aTlFRmIbqgmlXafasNVhLYkuMInmkGAH0ZvIjdpew=h460-rw" alt="Smash It screenshot 2"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/KrvUSolW23v-z4JOvdddXSrkCNVnFM7oKLlkMJSjprKRRY0Q5bickuHP_ehqZWUW-bHkwVqgGcLJlUNHdaqFsQ=h460-rw" alt="Smash It screenshot 3"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/uKdSyZXMiZ-QIh19i_cZUIc49RebTgA7_C-X4AEqQp07fyhb25OCry69YUAytxQYQJdOlz3hGFlhQqxK_YhN=h460-rw" alt="Smash It screenshot 4"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/uhYlRI2kC4ABrx_qmyAEzXajf_sWH2nD9EO54pg34qZ0Lhma7GFqlHb8-VjNXjdRpWERIMiUgUftey6nqogF2Hc=h460-rw" alt="Smash It screenshot 5"></button>
-        </div>
-      </article>
-
-      <article class="game" id="letter-hunt" data-tags="word puzzle">
-        <div>
-          <div class="game-top">
-            <img src="https://play-lh.googleusercontent.com/TwjxclEhnwYxaUWrvc6LzZAFwckl0VXHRcl1NtoS3tvY47p2mueQyUogmi6KOxfHsBBihO5kPR9yVcwcWf350w=s256-rw" alt="Letter Hunt icon">
-            <div>
-              <h3>Letter Hunt: Word Puzzle</h3>
-              <div class="tags"><span class="tag word">Word</span><span class="tag">Cozy</span></div>
+          <div class="p-media" data-slide-scope>
+            <div class="phone"><div class="screen" data-slides>
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/oDuYh0F0ib0HvPmlmY1FAYSxrTay9pQrcqFq8YDNJ2taRuddZmv2HS4Pd_Vi0rLNdL1Zsephsv-_WjHxTIgX=h900-rw" alt="Harvest Twist screenshot 1">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/VlAE9o4zaIvx6XuLr7e9XS7Wv7L-8UK237BgpjceKErMJ-YA4SusH5w2cKfHPmJCO5uxWdtwuYeJWZG_u8aj=h900-rw" alt="Harvest Twist screenshot 2">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/-W6AfyJWqnyd6EtoR3upj6TMf2nkEaHLm-COXVTOK9B-zGUU1MmMPv9g8_bJQ-CXXbWnEhmXSeRqq9idElqYRnM=h900-rw" alt="Harvest Twist screenshot 3">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/olRU8TZRdE44Qdl8VhsA2aMKKHKUUvHJj3VkepRPT25E09KPCeKhG6QQjNyae8euhAWFUzJ1bqMfxDNE1PGV=h900-rw" alt="Harvest Twist screenshot 4">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/oVzp-vZQ-XBID0nEUIFkcC9AlzpgZliUfWYN3Dw_3UviMUQBOYeQQGVmcFLsRiuSnJfMJIB_59yl3qP9ohfQmA=h900-rw" alt="Harvest Twist screenshot 5">
+            </div></div>
+            <div class="p-nav">
+              <button class="arrow" type="button" data-dir="prev" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <div class="dots"></div>
+              <button class="arrow" type="button" data-dir="next" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
             </div>
           </div>
-          <p>Find the letters, tap them in order and spell words in 100 cozy word puzzles!</p>
-          <div class="actions">
-            <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=com.g4jali.letterhunt" target="_blank" rel="noopener">Get it on Google Play</a>
-            <a class="btn btn-ghost btn-sm" href="letter-hunt/">Game page</a>
-            <a class="btn btn-ghost btn-sm" href="letter-hunt/privacy.html">Privacy Policy</a>
-          </div>
-        </div>
-        <div class="shots">
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/Idb_4W3qwMvznvuF8L9AXh4wnsqgpNWp-lQmr3YX15d4X-lIbUW4DJYyp2NH7vE7tQ5n1fYFM5b2aHJXWqOP=h460-rw" alt="Letter Hunt screenshot 1"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/XMhcq7_InWHb5W0MKJdtL0Bhi5A2oodBxOw_HzP4O_UJvuzgaIlXLHmdH6KyeT2X4uoBWGs9xNCLfKwWeUXkMA=h460-rw" alt="Letter Hunt screenshot 2"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/ms__DoS9AqbDQHyfIr_D88Hm0OgJwxvlyJTtaZHgOUIKGfOZ4zjmtwpU1Ya67i1FDX3IXzP0-c1v92dVQWkC=h460-rw" alt="Letter Hunt screenshot 3"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/7PPIhPbBBgIkbjB1srnM14Wv1uNdl0I7jz_uVcQRaNsN31t6LRsopSTaHRp_1qFN_VZtPYvCbtAb--cfixo1QDo=h460-rw" alt="Letter Hunt screenshot 4"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/_t8cZrskljsTTqmBBZ4UKIusvtlatbpxn8ERqNornDauVeda_mHqZUokCOEMkcJdUZW0OADzb_BxdWlEEonZug=h460-rw" alt="Letter Hunt screenshot 5"></button>
-        </div>
-      </article>
+        </article>
 
-      <article class="game" id="find-it" data-tags="word puzzle">
-        <div>
-          <div class="game-top">
-            <img src="https://play-lh.googleusercontent.com/9zN3FAcjhnh3no0eKXmUgh-upBTCs03YeP_wMO7JV0LSqf991qUed9jkXiWwUWuq-ePz0gaVvWM7aekDrzgwVks=s256-rw" alt="Find It! icon">
-            <div>
-              <h3>Find It! – Letter Hunt</h3>
-              <div class="tags"><span class="tag puzzle">Puzzle</span><span class="tag">Relaxing</span></div>
+        <article class="panel" id="smash-it" role="tabpanel" style="--c:#ff7a45" hidden>
+          <div class="p-info">
+            <div class="p-head">
+              <img src="https://play-lh.googleusercontent.com/3ZlhO_SP8QrJXRRSbFNNxYCpuknfv-7tA_53m5-384wvwmyws2g-89v8fFmnG5r4kwnDELzazdswDCW11B4h=s256-rw" alt="Smash It icon">
+              <div><h3>Smash It: Whack-a-Mole</h3><div class="tags"><span class="tag c">Arcade</span><span class="tag">No ads</span><span class="tag">★ 5.0</span></div></div>
+            </div>
+            <p>A fast arcade game: whack the moles, dodge the bombs, beat the Boss Mole and race up the world ranks.</p>
+            <ul class="features">
+              <li>Quick, reflex-testing rounds</li>
+              <li>Dodge bombs, beat the Boss Mole</li>
+              <li>World leaderboards</li>
+              <li>No ads, play as a guest</li>
+            </ul>
+            <div class="p-actions">
+              <a class="btn btn-c" href="https://play.google.com/store/apps/details?id=com.DefaultCompany.WhackaMolemania" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 5 3.5z"/></svg>Get it on Google Play</a>
+              <a class="btn btn-ghost" href="smash-it/">Game page</a>
+              <a class="btn btn-ghost" href="privacy-policy.html">Privacy</a>
             </div>
           </div>
-          <p>Spot hidden letters, symbols &amp; look-alikes in a cozy, relaxing puzzle game!</p>
-          <div class="actions">
-            <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=com.g4jali.findit" target="_blank" rel="noopener">Get it on Google Play</a>
-            <a class="btn btn-ghost btn-sm" href="find-it/">Game page</a>
-            <a class="btn btn-ghost btn-sm" href="find-it/privacy.html">Privacy Policy</a>
+          <div class="p-media" data-slide-scope>
+            <div class="phone"><div class="screen" data-slides>
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/s1uCZ_6UK8zC8qrfjR8iX_woH2GR3nfXYy9m8wzpQ_jsdfiqSX5NuU4B3d4XxqAhNizzhCcEpNKVQNos94pG=h900-rw" alt="Smash It screenshot 1">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/uu0cET_y88efA28jJS9XiWkZeeKq6c-AdyOBuJy9BqnX9aTlFRmIbqgmlXafasNVhLYkuMInmkGAH0ZvIjdpew=h900-rw" alt="Smash It screenshot 2">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/KrvUSolW23v-z4JOvdddXSrkCNVnFM7oKLlkMJSjprKRRY0Q5bickuHP_ehqZWUW-bHkwVqgGcLJlUNHdaqFsQ=h900-rw" alt="Smash It screenshot 3">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/uKdSyZXMiZ-QIh19i_cZUIc49RebTgA7_C-X4AEqQp07fyhb25OCry69YUAytxQYQJdOlz3hGFlhQqxK_YhN=h900-rw" alt="Smash It screenshot 4">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/uhYlRI2kC4ABrx_qmyAEzXajf_sWH2nD9EO54pg34qZ0Lhma7GFqlHb8-VjNXjdRpWERIMiUgUftey6nqogF2Hc=h900-rw" alt="Smash It screenshot 5">
+            </div></div>
+            <div class="p-nav">
+              <button class="arrow" type="button" data-dir="prev" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <div class="dots"></div>
+              <button class="arrow" type="button" data-dir="next" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
           </div>
-        </div>
-        <div class="shots">
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/HVaw6z3a92yq2svCmyYN-r7XPeyXIhJWB-BUBn33e-Cu4B1eRTAW7hso3oxYKEz00cPC89TieJSh3QYwHAnpplM=h460-rw" alt="Find It! screenshot 1"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/wMDhHzjFhryO6F46WV6B6sUfIbRd6NEDuBaIYE1KEGkQOidxJpEPDrvkuTRlsUpgvfMW49av1zARDFkGfUoxaA=h460-rw" alt="Find It! screenshot 2"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/v0NIISMHPDKMYRd8L5o7POmj2JyhbMMRDeJopC7tthJgYL6TBhZF8wyLp0fa--_aM_Z5k75PnZaKQp9rUv2p=h460-rw" alt="Find It! screenshot 3"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/dRGDtgWPNba5TsHsod9eioP8euXOa4qC_onrZy9lLAbNytZpoRVgG5mjhjyy5HbkxTpjeQLooEQxpTZ4cKz5PGM=h460-rw" alt="Find It! screenshot 4"></button>
-          <button type="button"><img loading="lazy" src="https://play-lh.googleusercontent.com/N5vSRQ5gkDDks2j-B_paO2tBF_ExInoeG4O0yebvAJgtyj2G2URkrTGkv3kLcmAV5ishdr0vY02rd1hKhSFTeA=h460-rw" alt="Find It! screenshot 5"></button>
-        </div>
-      </article>
+        </article>
 
+        <article class="panel" id="letter-hunt" role="tabpanel" style="--c:#ff6fa8" hidden>
+          <div class="p-info">
+            <div class="p-head">
+              <img src="https://play-lh.googleusercontent.com/TwjxclEhnwYxaUWrvc6LzZAFwckl0VXHRcl1NtoS3tvY47p2mueQyUogmi6KOxfHsBBihO5kPR9yVcwcWf350w=s256-rw" alt="Letter Hunt icon">
+              <div><h3>Letter Hunt</h3><div class="tags"><span class="tag c">Word</span><span class="tag">Offline</span><span class="tag">No ads</span></div></div>
+            </div>
+            <p>Spot the letters, tap them in order and spell the word. A relaxing word puzzle with a fun fact waiting at the end of every level.</p>
+            <ul class="features">
+              <li>100 levels, 38 themed categories</li>
+              <li>Daily Puzzle &amp; endless Word Rush</li>
+              <li>Word Album, quests &amp; trophies</li>
+              <li>Offline, no sign-up, no ads</li>
+            </ul>
+            <div class="p-actions">
+              <a class="btn btn-c" href="https://play.google.com/store/apps/details?id=com.g4jali.letterhunt" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 5 3.5z"/></svg>Get it on Google Play</a>
+              <a class="btn btn-ghost" href="letter-hunt/">Game page</a>
+              <a class="btn btn-ghost" href="letter-hunt/privacy.html">Privacy</a>
+            </div>
+          </div>
+          <div class="p-media" data-slide-scope>
+            <div class="phone"><div class="screen" data-slides>
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/Idb_4W3qwMvznvuF8L9AXh4wnsqgpNWp-lQmr3YX15d4X-lIbUW4DJYyp2NH7vE7tQ5n1fYFM5b2aHJXWqOP=h900-rw" alt="Letter Hunt screenshot 1">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/XMhcq7_InWHb5W0MKJdtL0Bhi5A2oodBxOw_HzP4O_UJvuzgaIlXLHmdH6KyeT2X4uoBWGs9xNCLfKwWeUXkMA=h900-rw" alt="Letter Hunt screenshot 2">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/ms__DoS9AqbDQHyfIr_D88Hm0OgJwxvlyJTtaZHgOUIKGfOZ4zjmtwpU1Ya67i1FDX3IXzP0-c1v92dVQWkC=h900-rw" alt="Letter Hunt screenshot 3">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/7PPIhPbBBgIkbjB1srnM14Wv1uNdl0I7jz_uVcQRaNsN31t6LRsopSTaHRp_1qFN_VZtPYvCbtAb--cfixo1QDo=h900-rw" alt="Letter Hunt screenshot 4">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/_t8cZrskljsTTqmBBZ4UKIusvtlatbpxn8ERqNornDauVeda_mHqZUokCOEMkcJdUZW0OADzb_BxdWlEEonZug=h900-rw" alt="Letter Hunt screenshot 5">
+            </div></div>
+            <div class="p-nav">
+              <button class="arrow" type="button" data-dir="prev" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <div class="dots"></div>
+              <button class="arrow" type="button" data-dir="next" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" id="find-it" role="tabpanel" style="--c:#3fd0d6" hidden>
+          <div class="p-info">
+            <div class="p-head">
+              <img src="https://play-lh.googleusercontent.com/9zN3FAcjhnh3no0eKXmUgh-upBTCs03YeP_wMO7JV0LSqf991qUed9jkXiWwUWuq-ePz0gaVvWM7aekDrzgwVks=s256-rw" alt="Find It! icon">
+              <div><h3>Find It!</h3><div class="tags"><span class="tag c">Puzzle</span><span class="tag">Relaxing</span><span class="tag">No ads</span></div></div>
+            </div>
+            <p>A cozy puzzle about sharp eyes and quick taps. Spot every hidden letter, number and symbol among the look-alikes before the timer runs out.</p>
+            <ul class="features">
+              <li>105 handcrafted levels</li>
+              <li>Tricky look-alikes: O vs 0, l vs I vs 1</li>
+              <li>Daily word puzzle &amp; streaks</li>
+              <li>8 cozy themes to unlock</li>
+            </ul>
+            <div class="p-actions">
+              <a class="btn btn-c" href="https://play.google.com/store/apps/details?id=com.g4jali.findit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 5 3.5z"/></svg>Get it on Google Play</a>
+              <a class="btn btn-ghost" href="find-it/">Game page</a>
+              <a class="btn btn-ghost" href="find-it/privacy.html">Privacy</a>
+            </div>
+          </div>
+          <div class="p-media" data-slide-scope>
+            <div class="phone"><div class="screen" data-slides>
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/HVaw6z3a92yq2svCmyYN-r7XPeyXIhJWB-BUBn33e-Cu4B1eRTAW7hso3oxYKEz00cPC89TieJSh3QYwHAnpplM=h900-rw" alt="Find It! screenshot 1">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/wMDhHzjFhryO6F46WV6B6sUfIbRd6NEDuBaIYE1KEGkQOidxJpEPDrvkuTRlsUpgvfMW49av1zARDFkGfUoxaA=h900-rw" alt="Find It! screenshot 2">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/v0NIISMHPDKMYRd8L5o7POmj2JyhbMMRDeJopC7tthJgYL6TBhZF8wyLp0fa--_aM_Z5k75PnZaKQp9rUv2p=h900-rw" alt="Find It! screenshot 3">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/dRGDtgWPNba5TsHsod9eioP8euXOa4qC_onrZy9lLAbNytZpoRVgG5mjhjyy5HbkxTpjeQLooEQxpTZ4cKz5PGM=h900-rw" alt="Find It! screenshot 4">
+              <img loading="lazy" src="https://play-lh.googleusercontent.com/N5vSRQ5gkDDks2j-B_paO2tBF_ExInoeG4O0yebvAJgtyj2G2URkrTGkv3kLcmAV5ishdr0vY02rd1hKhSFTeA=h900-rw" alt="Find It! screenshot 5">
+            </div></div>
+            <div class="p-nav">
+              <button class="arrow" type="button" data-dir="prev" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <div class="dots"></div>
+              <button class="arrow" type="button" data-dir="next" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 
-  <section id="about" class="wrap">
-    <div class="about">
-      <div>
-        <h2>About Gamez4jali</h2>
-        <p>Gamez4jali is an independent game studio building small, friendly mobile games with Unity.
-        We love simple ideas that feel great in your hands: one tap, one flick, one more round.</p>
-        <p>Every game is designed to be easy to learn, fun in short sessions and fair to play,
-        with clear privacy policies and no surprises.</p>
+  <!-- about -->
+  <section class="section" id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <span class="kicker">About the studio</span>
+        <h2>Simple ideas that feel great in your hands.</h2>
+        <p>Gamez4jali is an independent game studio building small, friendly mobile games with Unity. One tap, one flick, one more round.</p>
+        <p>Every game is designed to be easy to learn, fun in short sessions and fair to play, with clear privacy policies and no surprises.</p>
       </div>
       <div class="values">
-        <div class="value"><h3>🎯 Easy to pick up</h3><p>Learn in seconds, play anywhere, anytime.</p></div>
-        <div class="value"><h3>🌱 Cozy &amp; friendly</h3><p>Bright art and relaxing play for all ages.</p></div>
-        <div class="value"><h3>🔒 Respectful</h3><p>Clear privacy policies and easy data deletion.</p></div>
+        <div class="card reveal" style="--c:#ffc62e"><span class="ic">🎯</span><h3>Easy to pick up</h3><p>Learn in seconds, play anywhere, any time.</p></div>
+        <div class="card reveal" style="--c:#4fd68b; --d:.1s"><span class="ic">🌱</span><h3>Cozy &amp; friendly</h3><p>Bright art and relaxing play for all ages.</p></div>
+        <div class="card reveal" style="--c:#7fb8ff; --d:.2s"><span class="ic">🔒</span><h3>Respectful by design</h3><p>Clear privacy policies and easy data deletion.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="wrap">
-    <div class="contact">
-      <h2>Let's talk games</h2>
-      <p>Feedback, bug reports, partnerships or press: we'd love to hear from you.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="mailto:gamez4jali@gmail.com">✉ gamez4jali@gmail.com</a>
-        <a class="btn btn-ghost" href="https://www.linkedin.com/company/gamez4jali/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn btn-ghost" href="https://play.google.com/store/apps/dev?id=5060097297722451995" target="_blank" rel="noopener">Google Play</a>
+  <!-- contact -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="cta reveal">
+        <div class="cta-in">
+          <span class="kicker">Get in touch</span>
+          <h2 style="margin-top:14px">Let's talk games.</h2>
+          <p>Feedback, bug reports, partnerships or press: we'd love to hear from you.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="mailto:gamez4jali@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>gamez4jali@gmail.com</a>
+            <a class="btn btn-ghost" href="https://www.linkedin.com/company/gamez4jali/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.95 1.32-1.95 2.7V21h-4z"/></svg>Follow on LinkedIn</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap foot">
-    <div>
-      <a class="brand" href="#">Gamez<span>4</span>jali</a>
-      <p>Small, friendly mobile games.<br>© 2026 Gamez4jali</p>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark">G</span><span>Gamez<b>4</b>jali</span></a>
+        <p>Small, friendly mobile games, made with Unity.</p>
+      </div>
+      <div>
+        <h4>Tap Cricket Go!</h4>
+        <ul>
+          <li><a href="tap-cricket-go/">Game page</a></li>
+          <li><a href="tap-cricket-go/privacy.html">Privacy Policy</a></li>
+          <li><a href="tap-cricket-go/terms.html">Terms of Service</a></li>
+          <li><a href="tap-cricket-go/delete-data.html">Delete your data</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Harvest Twist</h4>
+        <ul>
+          <li><a href="harvest-twist/">Game page</a></li>
+          <li><a href="harvest-twist/privacy.html">Privacy Policy</a></li>
+          <li><a href="harvest-twist/terms.html">Terms of Service</a></li>
+          <li><a href="harvest-twist/delete-data.html">Delete your data</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Letter Hunt</h4>
+        <ul>
+          <li><a href="letter-hunt/">Game page</a></li>
+          <li><a href="letter-hunt/privacy.html">Privacy Policy</a></li>
+          <li><a href="letter-hunt/terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Find It!</h4>
+        <ul>
+          <li><a href="find-it/">Game page</a></li>
+          <li><a href="find-it/privacy.html">Privacy Policy</a></li>
+          <li><a href="find-it/terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Smash It</h4>
+        <ul>
+          <li><a href="smash-it/">Game page</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h4>Tap Cricket Go!</h4>
-      <ul>
-        <li><a href="tap-cricket-go/">Game page</a></li>
-        <li><a href="tap-cricket-go/privacy.html">Privacy Policy</a></li>
-        <li><a href="tap-cricket-go/terms.html">Terms of Service</a></li>
-        <li><a href="tap-cricket-go/delete-data.html">Delete your data</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Harvest Twist</h4>
-      <ul>
-        <li><a href="harvest-twist/">Game page</a></li>
-        <li><a href="harvest-twist/privacy.html">Privacy Policy</a></li>
-        <li><a href="harvest-twist/terms.html">Terms of Service</a></li>
-        <li><a href="harvest-twist/delete-data.html">Delete your data</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Smash It</h4>
-      <ul>
-        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-      </ul>
-      <h4 style="margin-top:16px">Letter Hunt</h4>
-      <ul>
-        <li><a href="letter-hunt/">Game page</a></li>
-        <li><a href="letter-hunt/privacy.html">Privacy Policy</a></li>
-        <li><a href="letter-hunt/terms.html">Terms of Service</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Find It!</h4>
-      <ul>
-        <li><a href="find-it/">Game page</a></li>
-        <li><a href="find-it/privacy.html">Privacy Policy</a></li>
-        <li><a href="find-it/terms.html">Terms of Service</a></li>
-      </ul>
-      <h4 style="margin-top:16px">Follow</h4>
-      <ul>
-        <li><a href="https://www.linkedin.com/company/gamez4jali/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://play.google.com/store/apps/dev?id=5060097297722451995" target="_blank" rel="noopener">Google Play</a></li>
-      </ul>
+    <div class="foot-bottom">
+      <span>© 2026 Gamez4jali. All rights reserved.</span>
+      <span><a href="https://play.google.com/store/apps/dev?id=5060097297722451995" target="_blank" rel="noopener">Google Play</a> · <a href="https://www.linkedin.com/company/gamez4jali/" target="_blank" rel="noopener">LinkedIn</a> · <a href="mailto:gamez4jali@gmail.com">Email</a></span>
     </div>
   </div>
 </footer>
 
-<dialog id="lightbox">
-  <form method="dialog"><button aria-label="Close">×</button></form>
+<dialog class="lightbox" aria-label="Screenshot">
+  <button class="close" type="button" aria-label="Close">×</button>
   <img alt="">
 </dialog>
 
-<script>
-  // genre filter
-  const filterBtns = document.querySelectorAll('.filters button');
-  filterBtns.forEach(btn => btn.addEventListener('click', () => {
-    const f = btn.dataset.filter;
-    filterBtns.forEach(b => b.setAttribute('aria-pressed', b === btn));
-    document.querySelectorAll('.game').forEach(g => {
-      g.hidden = f !== 'all' && !g.dataset.tags.split(' ').includes(f);
-    });
-  }));
-
-  // screenshot lightbox
-  const box = document.getElementById('lightbox');
-  const boxImg = box.querySelector('img');
-  document.querySelectorAll('.shots button').forEach(b => b.addEventListener('click', () => {
-    const img = b.querySelector('img');
-    boxImg.src = img.src.replace(/=h\d+-rw$/, '=h1200-rw');
-    boxImg.alt = img.alt;
-    box.showModal();
-  }));
-  box.addEventListener('click', e => { if (e.target === box) box.close(); });
-</script>
+<script src="assets/site.js"></script>
 </body>
 </html>
