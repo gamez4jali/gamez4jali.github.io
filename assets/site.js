@@ -135,18 +135,28 @@
       if (d) select(tabs[(n + d + tabs.length) % tabs.length].getAttribute('aria-controls'), true);
     });
   });
-  // links to a game (#tap-cricket-go etc.) open its tab and scroll to the showcase
+  if (panels.length) select(panels[0].id);
+
+  // in-page links scroll without putting a #hash in the address, so a reload always opens at the top
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   const games = $('#games');
-  const fromHash = (hash, scroll) => {
-    if (hash && select(hash.slice(1)) && scroll && games) games.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  const goTo = (hash, smooth) => {
+    const id = hash.slice(1), behavior = smooth && !reduce ? 'smooth' : 'instant';
+    if (panels.some(p => p.id === id)) { select(id); if (games) games.scrollIntoView({ behavior }); return true; }
+    if (id === 'top') { scrollTo({ top: 0, behavior }); return true; }
+    const el = id && document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior });
+    return !!el;
   };
-  $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
-    const h = a.getAttribute('href');
-    if (panels.some(p => '#' + p.id === h)) { e.preventDefault(); fromHash(h, true); history.replaceState(null, '', h); }
-  }));
-  if (panels.length) {
-    if (!(location.hash && panels.some(p => '#' + p.id === location.hash) && (fromHash(location.hash, false), setTimeout(() => games && games.scrollIntoView(), 50), true))) select(panels[0].id);
-  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (a && a.getAttribute('href').length > 1 && goTo(a.getAttribute('href'), true)) e.preventDefault();
+  });
+  // arriving with a hash (e.g. "All games" from a game page): jump there once, then drop the hash
+  addEventListener('load', () => {
+    if (location.hash) { goTo(location.hash, false); history.replaceState(null, '', location.pathname + location.search); }
+    else scrollTo({ top: 0, behavior: 'instant' });
+  });
 
   // home: hero phone cycles through each game
   const heroScreen = $('.hero-stage .screen');
